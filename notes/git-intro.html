@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本屋さんで覚えるGit入門 | ノート</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #bbdefb, #e3f2fd, #fce4ec, #f8bbd0);
+      font-family: "Hiragino Maru Gothic Pro", "BIZ UDPGothic", sans-serif;
+      padding: clamp(32px, 6vw, 60px) 20px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: #001f5b;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    .article-header {
+      margin-bottom: 48px;
+    }
+
+    .article-header h1 {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      color: #001f5b;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .article-header .article-subtitle {
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      color: #7b4f7b;
+    }
+
+    /* セクション */
+    .section {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: clamp(20px, 5vw, 36px) clamp(16px, 5vw, 40px);
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(180, 120, 160, 0.15);
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #001f5b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f8bbd0;
+    }
+
+    .section-title .num {
+      display: inline-block;
+      background: #f06292;
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-right: 8px;
+    }
+
+    /* 登場人物テーブル */
+    .role-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.97rem;
+    }
+
+    .role-table th {
+      background: #e3f2fd;
+      color: #1565c0;
+      font-weight: bold;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .role-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f0e0ea;
+      color: #333;
+      line-height: 1.6;
+      vertical-align: top;
+    }
+
+    .role-table tr:last-child td { border-bottom: none; }
+
+    .role-table td:first-child {
+      font-weight: bold;
+      color: #001f5b;
+      white-space: nowrap;
+      width: 160px;
+    }
+
+    .role-table td .book-role {
+      display: inline-block;
+      background: #fce4ec;
+      color: #c2185b;
+      font-size: 0.82rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    /* 4つの言葉 */
+    .word-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .word-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .word-label {
+      background: #001f5b;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .word-desc {
+      font-size: 0.97rem;
+      color: #333;
+      line-height: 1.7;
+      padding-top: 4px;
+    }
+
+    /* ステップ */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step-item {
+      border-left: 4px solid #f06292;
+      padding-left: 20px;
+    }
+
+    .step-header {
+      font-weight: bold;
+      color: #001f5b;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .step-header .step-num {
+      color: #f06292;
+      margin-right: 6px;
+    }
+
+    .step-body {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.75;
+    }
+
+    .step-body .instruction-box {
+      background: #f3e5f5;
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin: 8px 0;
+      font-size: 0.9rem;
+      color: #4a148c;
+    }
+
+    .step-body .instruction-box::before {
+      content: "AIへの指示: ";
+      font-weight: bold;
+    }
+
+    .step-body .check-box {
+      background: #e8f5e9;
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin: 8px 0;
+      font-size: 0.9rem;
+      color: #1b5e20;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 520px) {
+      /* テーブル → 縦積みカード */
+      .role-table thead { display: none; }
+
+      .role-table tr {
+        display: block;
+        padding: 14px 0;
+        border-bottom: 1px solid #f0e0ea;
+      }
+
+      .role-table tr:last-child { border-bottom: none; }
+
+      .role-table td {
+        display: block;
+        border-bottom: none;
+        padding: 3px 0;
+        width: auto;
+      }
+
+      .role-table td:first-child {
+        font-size: 1rem;
+        white-space: normal;
+      }
+
+      /* 4つの言葉 → ラベル上・説明下 */
+      .word-item {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .word-label {
+        min-width: unset;
+        width: fit-content;
+      }
+
+      /* ステップの左ボーダーを細く */
+      .step-item {
+        padding-left: 14px;
+      }
+    }
+
+    /* Tips */
+    .tips-box {
+      background: #fffde7;
+      border-left: 4px solid #fdd835;
+      border-radius: 0 12px 12px 0;
+      padding: 18px 20px;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .tips-box .tips-title {
+      font-weight: bold;
+      color: #f57f17;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="../notes.html">← ノート一覧へ戻る</a>
+
+    <div class="article-header">
+      <h1>本屋さんで覚えるGit入門</h1>
+      <p class="article-subtitle">Pull・Commit・Push・Mergeの4ステップ完全ガイド</p>
+    </div>
+
+    <!-- セクション1 -->
+    <div class="section">
+      <div class="section-title"><span class="num">1</span>登場人物と場所の整理</div>
+      <table class="role-table">
+        <tr>
+          <th>名前</th>
+          <th>本屋さんに例えると</th>
+          <th>役割</th>
+        </tr>
+        <tr>
+          <td>GitHub<br>（クラウド）</td>
+          <td><span class="book-role">本社</span></td>
+          <td>全データの「原本」を保管している金庫。</td>
+        </tr>
+        <tr>
+          <td>ローカル<br>（Mac）</td>
+          <td><span class="book-role">手元の作業机</span></td>
+          <td>本社からデータを借りてきて、実際に書き換える場所。</td>
+        </tr>
+        <tr>
+          <td>main<br>（ブランチ）</td>
+          <td><span class="book-role">売り場に並ぶ完成品</span></td>
+          <td>お客さんが見る本番。絶対汚してはいけない。</td>
+        </tr>
+        <tr>
+          <td>staging<br>（ブランチ）</td>
+          <td><span class="book-role">校正用のコピー</span></td>
+          <td>自由に書き込んでいいテスト用の本。</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- セクション2 -->
+    <div class="section">
+      <div class="section-title"><span class="num">2</span>4つの魔法の言葉</div>
+      <div class="word-list">
+        <div class="word-item">
+          <span class="word-label">プル (Pull)</span>
+          <span class="word-desc">本社の金庫から最新のデータを、自分の作業机に<strong>「持ってくる」</strong>。</span>
+        </div>
+        <div class="word-item">
+          <span class="word-label">コミット (Commit)</span>
+          <span class="word-desc">作業机で書いた内容に、「よし、これでOK！」とハンコを押す（まだ自分の机の上）。</span>
+        </div>
+        <div class="word-item">
+          <span class="word-label">プッシュ (Push)</span>
+          <span class="word-desc">ハンコを押したデータを、本社の金庫（GitHub）に<strong>「送る」</strong>。</span>
+        </div>
+        <div class="word-item">
+          <span class="word-label">マージ (Merge)</span>
+          <span class="word-desc">本社の金庫の中で、校正用の本（staging）の内容を、完成品（main）に<strong>「合体させる」</strong>。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- セクション3 -->
+    <div class="section">
+      <div class="section-title"><span class="num">3</span>修正依頼〜完了までの「100%成功マニュアル」</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-header"><span class="step-num">STEP 1</span>作業机を最新にする（出社）</div>
+          <div class="step-body">
+            まず、本社の金庫にある最新版を、自分の机に持ってきます。
+            <div class="instruction-box">「main ブランチに切り替えて、最新の状態を pull してきて。そのあと staging に切り替えて、main の内容を反映させて（同期して）。」</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><span class="step-num">STEP 2</span>AIに修正させる（作業）</div>
+          <div class="step-body">
+            ここで初めて、中身を書き換えます。
+            <div class="instruction-box">「index.html の見出しを『〇〇』に変えて。」</div>
+            <div class="check-box">✅ 自分の確認：Finderでファイルを開いて、ブラウザで見た目が変わったかチェック！</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><span class="step-num">STEP 3</span>金庫に送る（出荷）</div>
+          <div class="step-body">
+            机でできた内容を、GitHubの金庫（staging）に送ります。
+            <div class="instruction-box">「修正内容を commit して、GitHub に push して。」</div>
+            ※これでGitHubの「stagingブランチ」が更新されます。
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><span class="step-num">STEP 4</span>本番に合体させる（開店）</div>
+          <div class="step-body">
+            最後はブラウザ（GitHubの画面）で、本番の完成品に反映させます。<br>
+            GitHubでの操作：Pull Request を作る → 中身をチェックして、Merge ボタンを押す（合体完了！）。
+          </div>
+        </div>
+      </div>
+
+      <div class="tips-box">
+        <div class="tips-title">💡 なぜ「ローカル」と「GitHub」に分かれているの？</div>
+        もしGitHub（金庫）を直接いじって、書き換え中にネットが切れたり、間違えて全部消しちゃったりしたら、取り返しがつきません。<br>
+        だから、<strong>「一度手元（ローカル）に持ってきて、納得いくまで直してから、最後にまとめて金庫（GitHub）に送る」</strong>という仕組みになっているんです。
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

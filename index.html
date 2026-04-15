@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>真島のAI練習サイト</title>
+  <title>未来を、AIと作る。| Mashima's Lab</title>
   <style>
     * {
       margin: 0;
@@ -25,7 +25,7 @@
       background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(10px);
       border-radius: 24px;
-      padding: 60px 80px;
+      padding: clamp(32px, 8vw, 60px) clamp(24px, 10vw, 80px);
       text-align: center;
       box-shadow: 0 8px 32px rgba(180, 120, 160, 0.2);
       max-width: 640px;
@@ -33,39 +33,70 @@
     }
 
     h1 {
-      font-size: 3.8rem;
-      color: #001f5b;
+      font-size: clamp(1.5rem, 6vw, 2.2rem);
+      color: #f06292;
       letter-spacing: 0.05em;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
+      white-space: nowrap;
+    }
+
+    h1 .punct {
+      letter-spacing: -0.25em;
+    }
+
+    .site-subtitle {
+      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      color: #f06292;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
       color: #7b4f7b;
       line-height: 1.8;
       margin-top: 12px;
     }
 
-    .badge {
-      display: inline-block;
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
       margin-top: 28px;
-      padding: 8px 20px;
-      background: linear-gradient(90deg, #f48fb1, #ce93d8);
+    }
+
+    .btn {
+      padding: 14px 0;
+      width: min(240px, 70vw);
+      background: #f06292;
       color: white;
+      border: none;
       border-radius: 999px;
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
       font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #e91e8c;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>AIと歩む真島の新時代</h1>
+    <h1>未来を<span class="punct">、</span>AIと作る。</h1>
+    <p class="site-subtitle">Mashima's Lab</p>
     <p>このサイトはGitとClaudeで管理されています</p>
     <p>ここは真島がAIを使いながら<br>Web制作を練習するためのサイトです。</p>
     <p>少しずつ、一歩ずつ。</p>
-    <span class="badge">Powered by Claude Code</span>
+    <div class="btn-group">
+      <a href="ai-log.html"><button class="btn">学習ログ</button></a>
+      <a href="notes.html"><button class="btn">ノート</button></a>
+    </div>
   </div>
 </body>
 </html>
