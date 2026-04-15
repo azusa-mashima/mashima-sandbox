@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ノート | 真島のAI練習サイト</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #bbdefb, #e3f2fd, #fce4ec, #f8bbd0);
+      font-family: "Hiragino Maru Gothic Pro", "BIZ UDPGothic", sans-serif;
+      padding: 60px 20px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: #001f5b;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #001f5b;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #7b4f7b;
+      margin-bottom: 40px;
+    }
+
+    .note-card {
+      display: block;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(180, 120, 160, 0.15);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .note-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(180, 120, 160, 0.25);
+    }
+
+    .note-card .tag {
+      display: inline-block;
+      background: #e3f2fd;
+      color: #1565c0;
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .note-card h2 {
+      font-size: 1.2rem;
+      color: #001f5b;
+      margin-bottom: 6px;
+    }
+
+    .note-card .note-sub {
+      font-size: 0.9rem;
+      color: #7b4f7b;
+      margin-bottom: 10px;
+    }
+
+    .note-card .note-desc {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .note-card .note-footer {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #f06292;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="index.html">← トップへ戻る</a>
+    <h1>ノート</h1>
+    <p class="subtitle">気づき・メモ・アイデアを残す場所</p>
+
+    <a class="note-card" href="notes/git-intro.html">
+      <span class="tag">Git入門</span>
+      <h2>本屋さんで覚えるGit入門</h2>
+      <p class="note-sub">Pull・Commit・Push・Mergeの4ステップ完全ガイド</p>
+      <p class="note-desc">GitHubとローカルの関係を本屋さんに例えて整理。修正依頼から本番反映までの100%成功マニュアル付き。</p>
+      <p class="note-footer">続きを読む →</p>
+    </a>
+
+  </div>
+</body>
+</html>
